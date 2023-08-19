@@ -16,7 +16,7 @@ mysql --user=root <<_EOF_
   DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
   FLUSH PRIVILEGES;
 _EOF_
-mysql -uroot -p${PASS_MYSQL_ROOT} -e "CREATE DATABASE mc /*\!40100 DEFAULT CHARACTER SET utf8 */;"
+mysql -uroot -p${PASS_MYSQL_ROOT} -e "CREATE DATABASE mc1 /*\!40100 DEFAULT CHARACTER SET utf8 */;"
 mysql -uroot -p${PASS_MYSQL_ROOT} -e "GRANT ALL PRIVILEGES ON mc.* TO root@localhost IDENTIFIED BY '${PASS_MYSQL_ROOT}'"
 mysql -uroot -p${PASS_MYSQL_ROOT} -e "FLUSH PRIVILEGES;"
 
