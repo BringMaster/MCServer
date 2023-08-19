@@ -1,0 +1,34 @@
+#
+# dockerfile - ubuntu 22.04, oracle-java19, mysql-server, maven, awscli
+#
+
+# Use ubuntu:22.04 as base image
+FROM ubuntu:22.04
+
+MAINTAINER Hari Krishna Ganji <dostiharise@gmail.com>
+
+# Install essentials
+RUN \
+    apt-get update && \
+    apt-get -y upgrade && \
+    apt-get install -y build-essential && \
+    apt-get install -y software-properties-common && \
+    apt-get install -y wget && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Java.
+RUN \
+    apt-get update -y && apt-get upgrade -y && \
+    apt-get install openjdk-19-jdk openjdk-19-jre -y && \
+    apt-get update
+
+# Install MySql
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN \
+    apt-get update && \
+    apt-get install -y mariadb-server && \
+    wget https://raw.githubusercontent.com/BringMaster/MCServer/main/mysql-secure.sh && \
+    chmod +x mysql-secure.sh && \
+    ./mysql-secure.sh && \
+    rm -rf /var/lib/apt/lists/*
